@@ -20,12 +20,12 @@ const fs = require('fs');
 // Array.prototype.map:    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 // Array.prototype.filter: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 const passes = fs
-  .readFileSync(__dirname + '/day5input.txt', 'utf8')
-  .split(/\r?\n/)
+  .readFileSync(__dirname + '/day5input.txt', 'utf8') // "FFBBBBBLLR\r\nBFBFBBBRLL\r\nFBFFFFBLRL\r\n...\r\n"
+  .split(/\r?\n/)                                     // "FFBBBBBLLR", "BFBFBBBRLL", "FBFFFFBLRL", ..., ""
   .map(s => s.trim())
-  .filter(Boolean);
+  .filter(Boolean);                                   // "" is false.
 
-// F/L = 0 and B/R = 1.
+// F/L = 0 and B/R = 1. ex: BBFFBBFRLL = 1100110100
 // The whole 10-char string is just a 10-bit binary number, and that number is
 // the seat ID directly (because shifting the row left by 3 and adding the column
 // is the same as concatenating the row's 7 bits and the column's 3 bits).
@@ -35,7 +35,7 @@ function seatId(pass) {
   // Replace F/L with 0 and B/R with 1. A character class lets each replace
   // call handle both letters at once.
   const binary = pass.replace(/[FL]/g, '0').replace(/[BR]/g, '1');
-  return parseInt(binary, 2);
+  return parseInt(binary, 2); // Parses a string and returns an integer.
 }
 
 const ids = passes.map(seatId);
@@ -48,7 +48,8 @@ const part1 = Math.max(...ids);
 // --- Part 2 ---
 // Sort, then walk the list looking for a gap of 2 (a missing ID between
 // two present ones).
-// Array.prototype.sort: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+// Array.prototype.slice: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+// Array.prototype.sort:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 const sorted = ids.slice().sort((a, b) => a - b);
 let part2;
 for (let i = 1; i < sorted.length; i++) {
