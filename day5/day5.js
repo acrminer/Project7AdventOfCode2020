@@ -16,6 +16,9 @@
 // fs: https://nodejs.org/api/fs.html
 const fs = require('fs');
 
+// String.prototype.split: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+// Array.prototype.map:    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+// Array.prototype.filter: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 const passes = fs
   .readFileSync(__dirname + '/day5input.txt', 'utf8')
   .split(/\r?\n/)
